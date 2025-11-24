@@ -91,14 +91,14 @@ const Login = ({ setToken }) => {
             <div className="flex justify-between mt-3 text-sm">
               {currentState === "Login" ? (
                 <p
-                  className="text-blue-600 cursor-pointer hover:underline"
+                  className="text-black cursor-pointer hover:underline"
                   onClick={() => setCurrentState("Sign Up")}
                 >
                   Create admin account
                 </p>
               ) : (
                 <p
-                  className="text-blue-600 cursor-pointer hover:underline"
+                  className="text-black cursor-pointer hover:underline"
                   onClick={() => setCurrentState("Login")}
                 >
                   Already have an account? Login
