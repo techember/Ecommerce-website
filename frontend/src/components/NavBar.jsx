@@ -5,7 +5,10 @@ import { ShopContext } from '../context/ShopContext';
 
 const NavBar = () => {
     const [visible, setVisible] = useState(false);
-    const {setShowSearch, getCartCount} = useContext(ShopContext);
+    const token = localStorage.getItem("token");
+
+    const { setShowSearch, getCartCount } = useContext(ShopContext); // Assuming isLoggedIn is in your context
+
   return (
     <div className='flex items-center justify-between py-5 font-medium'>
         <Link to='/'>
@@ -37,7 +40,8 @@ const NavBar = () => {
                 alt="Search Products" 
             />
             <div className='relative group'>
-                <Link to='/login'>
+                {/* Conditionally render the profile link based on isLoggedIn */}
+                <Link to={token ? '/accounts' : '/login'}>
                     <img src={assets.profile_icon} className='w-5 cursor-pointer' alt="Your Profile" />
                 </Link>
                 <div className='absolute right-0 hidden pt-4 group-hover:block dropdown-menu'>
