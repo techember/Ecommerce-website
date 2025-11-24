@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import validator from "validator";
 import userModel from "../models/userModel.js";
+import adminModel from "../models/adminModel.js";
 
 // INFO: Function to create token
 const createToken = (id) => {
@@ -91,22 +92,56 @@ const loginAdmin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if (
-      email === process.env.ADMIN_EMAIL &&
-      password === process.env.ADMIN_PASSWORD
-    ) {
-      const token = jwt.sign(email + password, process.env.JWT_SECRET);
-
-      res.status(200).json({ success: true, token });
-    } else {
-      res
+    const admin = await adminModel.findOne({ email });
+    if (!admin) {
+      return res
         .status(400)
         .json({ success: false, message: "Invalid email or password" });
     }
+
+    const isPasswordCorrect = await bcrypt.compare(password, admin.password);
+    if (!isPasswordCorrect) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid email or password" });
+    }
+
+    const token = jwt.sign(
+      { id: admin._id, role: admin.role },
+      process.env.JWT_SECRET,
+    );
+
+    res.status(200).json({ success: true, token });
   } catch (error) {
     console.log("Error while logging in admin: ", error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
 
-export { loginUser, registerUser, loginAdmin };
+const registerAdmin = async (req, res) => {
+  try {
+    const { name, email, password, role } = req.body;
+
+    const existing = await adminModel.findOne({ email });
+    if (existing) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Admin already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const admin = await adminModel.create({
+      name,
+      email,
+      password: hashedPassword,
+      role: role || "admin",
+    });
+
+    res.json({ success: true, admin });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export { loginUser, registerUser, loginAdmin , registerAdmin};
