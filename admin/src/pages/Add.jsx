@@ -39,7 +39,7 @@ const Add = ({ token }) => {
       const response = await axios.post(
         backendUrl + "/api/product/add",
         formData,
-        { headers: { token } }
+        { headers: { token } },
       );
 
       if (response.data.success) {
@@ -78,7 +78,7 @@ const Add = ({ token }) => {
         <div className="flex gap-2">
           <label htmlFor="image1">
             <img
-              className="w-20 border-2 border-gray-500 rounded-lg cursor-pointer"
+              className="w-20 border-2 border-gray-300 rounded-lg cursor-pointer"
               src={!image1 ? assets.upload_area : URL.createObjectURL(image1)}
               alt="Upload Images"
             />
@@ -92,7 +92,7 @@ const Add = ({ token }) => {
           </label>
           <label htmlFor="image2">
             <img
-              className="w-20 border-2 border-gray-500 rounded-lg cursor-pointer"
+              className="w-20 border-2 border-gray-300 rounded-lg cursor-pointer"
               src={!image2 ? assets.upload_area : URL.createObjectURL(image2)}
               alt="Upload Images"
             />
@@ -106,7 +106,7 @@ const Add = ({ token }) => {
           </label>
           <label htmlFor="image3">
             <img
-              className="w-20 border-2 border-gray-500 rounded-lg cursor-pointer"
+              className="w-20 border-2 border-gray-300 rounded-lg cursor-pointer"
               src={!image3 ? assets.upload_area : URL.createObjectURL(image3)}
               alt="Upload Images"
             />
@@ -120,7 +120,7 @@ const Add = ({ token }) => {
           </label>
           <label htmlFor="image4">
             <img
-              className="w-20 border-2 border-gray-500 rounded-lg cursor-pointer"
+              className="w-20 border-2 border-gray-300 rounded-lg cursor-pointer"
               src={!image4 ? assets.upload_area : URL.createObjectURL(image4)}
               alt="Upload Images"
             />
@@ -139,7 +139,7 @@ const Add = ({ token }) => {
         <input
           onChange={(e) => setName(e.target.value)}
           value={name}
-          className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none max-w-[500px]"
           type="text"
           placeholder="Enter Product Name"
           required
@@ -150,8 +150,7 @@ const Add = ({ token }) => {
         <textarea
           onChange={(e) => setDescription(e.target.value)}
           value={description}
-          className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
-          type="text"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none max-w-[500px]"
           placeholder="Enter Product Description"
           required
         />
@@ -162,7 +161,7 @@ const Add = ({ token }) => {
           <select
             onChange={(e) => setCategory(e.target.value)}
             value={category}
-            className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none max-w-[500px]"
             required
           >
             <option value="">Select Category</option>
@@ -176,7 +175,7 @@ const Add = ({ token }) => {
           <select
             onChange={(e) => setSubCategory(e.target.value)}
             value={subCategory}
-            className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none max-w-[500px]"
             required
           >
             <option value="">Select Sub Category</option>
@@ -190,7 +189,7 @@ const Add = ({ token }) => {
           <input
             onChange={(e) => setPrice(e.target.value)}
             value={price}
-            className="w-full px-3 py-2 border-gray-500 max-w-[500px]"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md outline-none max-w-[500px]"
             type="number"
             placeholder="Enter Product Price"
             required
@@ -207,16 +206,14 @@ const Add = ({ token }) => {
                 setSizes((prev) =>
                   prev.includes(size)
                     ? prev.filter((item) => item !== size)
-                    : [...prev, size]
+                    : [...prev, size],
                 )
               }
             >
               <p
                 className={`${
-                  sizes.includes(size)
-                    ? "bg-gray-500 text-white rounded-md"
-                    : "bg-slate-200"
-                } px-3 py-1 cursor-pointer`}
+                  sizes.includes(size) ? "bg-black text-white" : "bg-slate-200"
+                } px-3 py-1 cursor-pointer rounded-md`}
               >
                 {size}
               </p>
@@ -238,13 +235,13 @@ const Add = ({ token }) => {
       <div className="flex flex-col w-full gap-2 sm:flex-row sm:gap-8">
         <button
           type="submit"
-          className="px-5 py-2 mt-2 text-white rounded-lg bg-slate-700"
+          className="px-5 py-2 mt-2 text-white bg-black rounded-md hover:bg-gray-800"
         >
           Add Product
         </button>
         <button
           type="button"
-          className="px-5 py-2 mt-2 text-white rounded-lg bg-slate-700"
+          className="px-5 py-2 mt-2 text-white bg-gray-600 rounded-md hover:bg-gray-700"
           onClick={resetForm}
         >
           Reset Details
