@@ -128,7 +128,6 @@ const NewsLetterBox = () => {
             <button
               onClick={() => {
                 navigator.clipboard.writeText("WELCOME20");
-                alert("Discount code copied to clipboard!");
               }}
               className="flex-1 px-6 py-3 text-sm text-white bg-black rounded-lg hover:bg-gray-800 transition-colors"
             >
