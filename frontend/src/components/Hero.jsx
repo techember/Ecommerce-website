@@ -1,9 +1,11 @@
 import React from 'react'
 import { assets } from '../assets/assets'
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
+    const navigate = useNavigate();
   return (
-    <div className='flex flex-col border border-gray-400 sm:flex-row'>
+    <div onClick={()=>{navigate("/bestSellers")}} className='flex flex-col border border-gray-400 sm:flex-row hover:cursor-pointer'>
         {/* Hero left side */}
         <div className='flex items-center justify-center w-full py-10 sm:w-1/2 sm:py-0'>
             <div className='text-[#414141]'>
