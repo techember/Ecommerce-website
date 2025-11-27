@@ -39,7 +39,12 @@ const Add = ({ token }) => {
       const response = await axios.post(
         backendUrl + "/api/product/add",
         formData,
-        { headers: { token } },
+        {
+          headers: {
+            token: token,
+            "Content-Type": "multipart/form-data",
+          },
+        },
       );
 
       if (response.data.success) {
@@ -50,7 +55,7 @@ const Add = ({ token }) => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong");
+      toast.error(error.response?.data?.message || "Something went wrong");
     }
   };
 
