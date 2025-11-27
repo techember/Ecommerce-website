@@ -172,14 +172,13 @@ const registerAdmin = async (req, res) => {
 
 const logoutUser = async (req, res) => {
   try {
-      res.clearCookie("token", {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-      });
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
 
-      return res.status(200).json({ message: "Logged out successfully" });
-
+    return res.status(200).json({ message: "Logged out successfully" });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
